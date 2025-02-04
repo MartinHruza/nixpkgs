@@ -8,7 +8,6 @@
 , libevdev
 , mtdev
 , udev
-, libwacom
 , documentationSupport ? false
 , doxygen
 , graphviz
@@ -76,7 +75,6 @@ stdenv.mkDerivation rec {
   buildInputs = [
     libevdev
     mtdev
-    libwacom
     (python3.withPackages (pp: with pp; [
       pp.libevdev # already in scope
       pyudev
@@ -104,6 +102,7 @@ stdenv.mkDerivation rec {
     (mkFlag documentationSupport "documentation")
     (mkFlag eventGUISupport "debug-gui")
     (mkFlag testsSupport "tests")
+    "-Dlibwacom=false"
     "--sysconfdir=/etc"
     "--libexecdir=${placeholder "bin"}/libexec"
   ];
